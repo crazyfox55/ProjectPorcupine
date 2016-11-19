@@ -38,7 +38,7 @@ public class Tile : ISelectable, IContextActionProvider, IComparable, IEquatable
         X = x;
         Y = y;
         Z = z;
-        Characters = new List<Character>();
+        //Characters = new List<Character>();
         MovementModifier = 1;
         Utilities = new Dictionary<string, Utility>();
         ReservedAsWorkSpotBy = new HashSet<Furniture>();
@@ -64,7 +64,7 @@ public class Tile : ISelectable, IContextActionProvider, IComparable, IEquatable
 
     public Room Room { get; set; }
 
-    public List<Character> Characters { get; set; }
+    //public List<Character> Characters { get; set; }
 
     // Furniture is something like a wall, door, or sofa.
     public Furniture Furniture { get; private set; }

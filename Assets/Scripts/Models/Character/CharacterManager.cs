@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using MoonSharp.Interpreter;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// Character manager that holds all the characters.
@@ -20,6 +21,9 @@ using UnityEngine;
 public class CharacterManager : IEnumerable<Character>
 {
     public List<Character> characters;
+    private HashSet<Tile> occupiedTiles;
+
+    public static CharacterManager Instance;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CharacterManager"/> class.
@@ -27,6 +31,8 @@ public class CharacterManager : IEnumerable<Character>
     public CharacterManager()
     {
         characters = new List<Character>();
+        occupiedTiles = new HashSet<Tile>();
+        Instance = this;
     }
 
     /// <summary>
@@ -81,6 +87,38 @@ public class CharacterManager : IEnumerable<Character>
         }
 
         return null;
+    }
+
+    public IEnumerable<Character> GetFromTile(Tile tile)
+    {
+        List<Character> tileCharacters = new List<Character>();
+        foreach (Character character in characters)
+        {
+            if (character.CurrTile == tile)
+            {
+                tileCharacters.Add(character);
+            }
+        }
+        if(tileCharacters.Count == 0)
+        {
+            return Enumerable.Empty<Character>();
+        }
+        return tileCharacters;
+    }
+
+    public bool HasCharacter(Tile tile)
+    {
+        return occupiedTiles.Contains(tile);
+    }
+
+    public void OccupyTile(Character character, Tile tile)
+    {
+        occupiedTiles.Add(tile);
+    }
+
+    public void LeaveTile(Character character, Tile tile)
+    {
+        occupiedTiles.Remove(tile);
     }
 
     /// <summary>

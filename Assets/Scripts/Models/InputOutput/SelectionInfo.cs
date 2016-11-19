@@ -33,9 +33,13 @@ public class SelectionInfo
         stuffInTile = new List<ISelectable>();
 
         // Copy the character references.
-        for (int i = 0; i < Tile.Characters.Count; i++)
+        /*for (int i = 0; i < Tile.Characters.Count; i++)
         {
             stuffInTile.Add(Tile.Characters[i]);
+        }*/
+        foreach (Character c in CharacterManager.Instance.GetFromTile(Tile))
+        {
+            stuffInTile.Add(c);
         }
 
         // Now assign references to the other three sub-selections available.

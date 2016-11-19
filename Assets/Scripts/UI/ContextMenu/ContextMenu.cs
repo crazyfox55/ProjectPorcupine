@@ -99,11 +99,14 @@ public class ContextMenu : MonoBehaviour
             }
         }
 
-        if (tile.Characters != null)
+        //if (tile.Characters != null)
+        if(CharacterManager.Instance.HasCharacter(tile))
         {
-            foreach (Character character in tile.Characters)
+            //foreach (Character character in tile.Characters)
+            foreach(Character c in CharacterManager.Instance.GetFromTile(tile))
             {
-                providers.Add(character);
+                //providers.Add(character);
+                providers.Add(c);
             }
         }
 

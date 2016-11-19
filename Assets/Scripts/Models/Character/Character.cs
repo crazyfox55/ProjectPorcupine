@@ -76,7 +76,7 @@ public class Character : ISelectable, IContextActionProvider
     private Color characterColor;
     private Color characterUniformColor;
     private Color characterSkinColor;
-
+    
     // The current state
     private State state;
 
@@ -175,12 +175,13 @@ public class Character : ISelectable, IContextActionProvider
         {
             if (currTile != null)
             {
-                currTile.Characters.Remove(this);
+                //currTile.Characters.Remove(this);
+                CharacterManager.Instance.LeaveTile(this, currTile);
             }
 
             currTile = value;
-            currTile.Characters.Add(this);
-
+            //currTile.Characters.Add(this);
+            CharacterManager.Instance.OccupyTile(this, currTile);
             TileOffset = Vector3.zero;
         }
     }
